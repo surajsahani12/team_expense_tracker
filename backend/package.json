@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Expense Tracker Application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surajsahani12/team_expense_tracker.git"
+  },
+  "author": "Suraj Sahani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/surajsahani12/team_expense_tracker/issues"
+  },
+  "homepage": "https://github.com/surajsahani12/team_expense_tracker#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
