@@ -1,28 +1,24 @@
 import "./Summary.css";
 import SummaryCard from "./SummaryCard";
 
-const Summary = () => {
+function Summary({ summary }) {
     return (
         <section className="summary">
 
             <SummaryCard
                 title="Total Expenses"
-                value="12,500"
-                prefix="₹"
+                value={`₹${summary.totalExpenses || 0}`}
             />
 
             <SummaryCard
                 title="Transactions"
-                value="48"
+                value={summary.totalTransactions || 0}
             />
-
 
             <SummaryCard
                 title="Average Expense"
-                value="260"
-                prefix="₹"
+                value={`₹${summary.averageExpense || 0}`}
             />
-
 
         </section>
     );

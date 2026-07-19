@@ -1,42 +1,88 @@
 import "./CategoryPanel.css";
-import { FaTrash } from 'react-icons/fa'
-function CategoryPanel() {
+import { useState } from "react";
+import { FaTrash } from "react-icons/fa";
+
+function CategoryPanel({
+    categories,
+    onAdd,
+    onDelete,
+}) {
+    const [categoryName, setCategoryName] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const name = categoryName.trim();
+
+        if (!name) {
+            alert("Category name is required.");
+            return;
+        }
+
+        onAdd(name);
+
+        setCategoryName("");
+    };
+
     return (
-        <section className="card">
+        <section className="card category-panel">
 
             <h2>Categories</h2>
 
-            <div className="category-list">
+            <p>Manage expense categories.</p>
 
-                <div className="category-item">
-                    <span>Food</span>
-                    <span><FaTrash /></span>
-                </div>
-
-                <div className="category-item">
-                    <span>Travel</span>
-                    <span><FaTrash /></span>
-                </div>
-
-                <div className="category-item">
-                    <span>Bills</span>
-                    <span><FaTrash /></span>
-                </div>
-
-            </div>
-
-            <div className="add-category">
-
+            <form
+                className="category-form"
+                onSubmit={handleSubmit}
+            >
                 <input
-                    placeholder="New category"
                     className="input"
+                    type="text"
+                    placeholder="New category"
+                    value={categoryName}
+                    onChange={(e) => setCategoryName(e.target.value)}
                 />
 
-                <button className="btn">
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                >
                     Add
                 </button>
+            </form>
 
-            </div>
+            <ul className="category-list">
+
+                {categories.length === 0 ? (
+
+                    <li className="empty-category">
+                        No categories available.
+                    </li>
+
+                ) : (
+
+                    categories.map((category) => (
+
+                        <li
+                            key={category.id}
+                            className="category-item"
+                        >
+                            <span>{category.name}</span>
+
+                            <button
+                                className="icon-btn delete-btn"
+                                onClick={() => onDelete(category.id)}
+                            >
+                                <FaTrash />
+                            </button>
+
+                        </li>
+
+                    ))
+
+                )}
+
+            </ul>
 
         </section>
     );

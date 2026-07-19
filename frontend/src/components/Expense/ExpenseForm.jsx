@@ -1,54 +1,172 @@
 import "./ExpenseForm.css";
+import { useState, useEffect } from "react";
 
-function ExpenseForm() {
+const initialForm = {
+    amount: "",
+    description: "",
+    category_id: "",
+    date: "",
+};
+
+function ExpenseForm({
+    categories,
+    editingExpense,
+    onSubmit,
+}) {
+
+    const [formData, setFormData] = useState(initialForm);
+
+    useEffect(() => {
+
+        if (editingExpense) {
+
+            setFormData({
+                amount: editingExpense.amount,
+                description: editingExpense.description,
+                category_id: editingExpense.category_id,
+                date: editingExpense.date?.split("T")[0] || editingExpense.date,
+            });
+
+        } else {
+
+            setFormData(initialForm);
+
+        }
+
+    }, [editingExpense]);
+
+    const handleChange = (e) => {
+
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+
+    };
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        if (
+            !formData.amount ||
+            !formData.description ||
+            !formData.category_id ||
+            !formData.date
+        ) {
+            alert("Please fill all fields.");
+            return;
+        }
+
+        onSubmit(formData);
+
+        if (!editingExpense) {
+            setFormData(initialForm);
+        }
+    };
+
     return (
         <section className="card expense-form-card">
 
-            <h2>Add New Expense</h2>
-            <p>Record your daily spending</p>
+            <h2>
+                {editingExpense ? "Edit Expense" : "Add Expense"}
+            </h2>
 
-            <form>
+            <p>
+                {editingExpense
+                    ? "Update your expense."
+                    : "Record a new expense."}
+            </p>
+
+            <form onSubmit={handleSubmit}>
 
                 <div className="form-group">
+
                     <label>Amount</label>
+
                     <input
-                        type="number"
-                        placeholder="Enter amount"
                         className="input"
+                        type="number"
+                        name="amount"
+                        value={formData.amount}
+                        onChange={handleChange}
+                        placeholder="₹0.00"
                     />
+
                 </div>
 
                 <div className="form-group">
+
                     <label>Description</label>
+
                     <input
-                        type="text"
-                        placeholder="What did you spend on?"
                         className="input"
+                        type="text"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        placeholder="Lunch with friends"
                     />
+
                 </div>
 
-                <div className="form-row">
+                <div className="row">
 
                     <div className="form-group">
+
                         <label>Category</label>
 
-                        <select className="input">
-                            <option>Select Category</option>
+                        <select
+                            className="input"
+                            name="category_id"
+                            value={formData.category_id}
+                            onChange={handleChange}
+                        >
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            {categories.map((category) => (
+
+                                <option
+                                    key={category.id}
+                                    value={category.id}
+                                >
+                                    {category.name}
+                                </option>
+
+                            ))}
+
                         </select>
 
                     </div>
 
                     <div className="form-group">
+
                         <label>Date</label>
 
-                        <input type="date" className="input" />
+                        <input
+                            className="input"
+                            type="date"
+                            name="date"
+                            value={formData.date}
+                            onChange={handleChange}
+                        />
 
                     </div>
 
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                    Save Expense
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                >
+                    {editingExpense
+                        ? "Update Expense"
+                        : "Save Expense"}
                 </button>
 
             </form>

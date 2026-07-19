@@ -1,9 +1,8 @@
-const SummaryCard = ({ title, value, prefix = "" }) => {
+function SummaryCard({ title, value }) {
     return (
         <div className="card summary-card">
             <p>{title}</p>
-            <h2>{value}  {prefix}</h2>
-
+            <h2>{value}</h2>
         </div>
     );
 }
