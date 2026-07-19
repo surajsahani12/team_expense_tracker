@@ -15,7 +15,7 @@ const getCategories = async (req, res) => {
 
 const createCategory = async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name, monthly_budget } = req.body;
 
         if (!name) {
             return res.status(400).json({
@@ -23,11 +23,21 @@ const createCategory = async (req, res) => {
             });
         }
 
+        if (monthly_budget !== undefined && monthly_budget < 0) {
+            return res.status(400).json({
+                message: "Monthly budget cannot be negative",
+            });
+        }
+        const budget =
+    monthly_budget === "" || monthly_budget === undefined
+        ? null
+        : Number(monthly_budget);
+
         const result = await db.query(
-            `INSERT INTO categories (name)
-             VALUES ($1)
+            `INSERT INTO categories (name, monthly_budget)
+             VALUES ($1, $2)
              RETURNING *`,
-            [name]
+            [name, budget]
         );
 
         res.status(201).json({

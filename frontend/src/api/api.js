@@ -10,13 +10,13 @@ export const getCategories = async () => {
     return await response.json();
 };
 
-export const createCategory = async (name) => {
+export const createCategory = async (name, monthlyBudget="") => {
     const response = await fetch(`${BASE_URL}/categories`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, monthly_budget: monthlyBudget }),
     });
 
     if (!response.ok) {

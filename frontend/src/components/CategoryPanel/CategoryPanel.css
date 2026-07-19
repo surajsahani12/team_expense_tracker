@@ -10,12 +10,13 @@
 
 .category-form {
     display: flex;
-    gap: var(--space-sm);
+    flex-direction: column;
+    gap: var(--space-md);
     margin-bottom: var(--space-lg);
 }
 
 .category-form .input {
-    flex: 1;
+    width: 100%;
 }
 
 .category-list {

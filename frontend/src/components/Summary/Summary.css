@@ -24,3 +24,8 @@
     font-size: 32px;
     font-weight: 700;
 }
+
+.over-budget {
+    background-color: #ffe5e5;
+    color: #ff4d4f;
+}

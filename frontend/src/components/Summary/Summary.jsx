@@ -5,20 +5,29 @@ function Summary({ summary }) {
     return (
         <section className="summary">
 
-            <SummaryCard
-                title="Total Expenses"
-                value={`₹${summary.totalExpenses || 0}`}
-            />
+            {/* <div >
+                <SummaryCard
+                    title="Total Expenses"
+                    value={`₹${summary.totalExpenses || 0}`}
+                />
+            </div> */}
 
-            <SummaryCard
+
+            {/* <SummaryCard
                 title="Transactions"
                 value={summary.totalTransactions || 0}
-            />
+            /> */}
 
-            <SummaryCard
-                title="Average Expense"
-                value={`₹${summary.averageExpense || 0}`}
-            />
+            {summary.categoryWise?.map((category, index) => (
+
+                <SummaryCard
+                    key={index}
+                    title={category.name}
+                    value={`₹${category.total || 0}`}
+                    flag={category.monthly_budget !== null && Number(category.total) > Number(category.monthly_budget) ? "over-budget" : ""}
+                />
+
+            ))}
 
         </section>
     );

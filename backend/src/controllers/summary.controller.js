@@ -15,12 +15,13 @@ const getSummary = async (req, res) => {
 
         const categoryWise = await db.query(
             `SELECT
-                c.name,
+                c.name, c.monthly_budget,
                 SUM(e.amount) AS total
+                
              FROM expenses e
              JOIN categories c
              ON e.category_id = c.id
-             GROUP BY c.name
+             GROUP BY c.name, c.monthly_budget
              ORDER BY total DESC`
         );
 

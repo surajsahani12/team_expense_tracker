@@ -5,7 +5,7 @@ const initialForm = {
     amount: "",
     description: "",
     category_id: "",
-    date: "",
+    expense_date: "",
 };
 
 function ExpenseForm({
@@ -24,7 +24,7 @@ function ExpenseForm({
                 amount: editingExpense.amount,
                 description: editingExpense.description,
                 category_id: editingExpense.category_id,
-                date: editingExpense.date?.split("T")[0] || editingExpense.date,
+                expense_date: editingExpense.expense_date?.split("T")[0] || editingExpense.expense_date,
             });
 
         } else {
@@ -46,17 +46,35 @@ function ExpenseForm({
 
     };
 
+    const validateForm = () => {
+        if (!formData.amount || Number(formData.amount) <= 0) {
+            alert("Amount must be greater than 0.");
+            return false;
+        }
+
+        if (!formData.description.trim()) {
+            alert("Description is required.");
+            return false;
+        }
+
+        if (!formData.category_id) {
+            alert("Please select a category.");
+            return false;
+        }
+
+        if (!formData.expense_date) {
+            alert("Please select a date.");
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = (e) => {
 
         e.preventDefault();
 
-        if (
-            !formData.amount ||
-            !formData.description ||
-            !formData.category_id ||
-            !formData.date
-        ) {
-            alert("Please fill all fields.");
+        if (!validateForm()) {
             return;
         }
 
@@ -150,9 +168,10 @@ function ExpenseForm({
 
                         <input
                             className="input"
+                            max={new Date().toISOString().split("T")[0]}
                             type="date"
-                            name="date"
-                            value={formData.date}
+                            name="expense_date"
+                            value={formData.expense_date}
                             onChange={handleChange}
                         />
 

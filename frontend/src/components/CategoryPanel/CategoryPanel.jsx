@@ -8,6 +8,7 @@ function CategoryPanel({
     onDelete,
 }) {
     const [categoryName, setCategoryName] = useState("");
+    const [monthlyBudget, setMonthlyBudget] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,11 +20,10 @@ function CategoryPanel({
             return;
         }
 
-        onAdd(name);
+        onAdd(name, monthlyBudget);
 
         setCategoryName("");
     };
-
     return (
         <section className="card category-panel">
 
@@ -38,16 +38,24 @@ function CategoryPanel({
                 <input
                     className="input"
                     type="text"
-                    placeholder="New category"
+                    placeholder="Category Name"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
+                />
+
+                <input
+                    className="input"
+                    type="number"
+                    placeholder="Monthly Budget (₹)"
+                    value={monthlyBudget}
+                    onChange={(e) => setMonthlyBudget(e.target.value)}
                 />
 
                 <button
                     type="submit"
                     className="btn btn-primary"
                 >
-                    Add
+                    Add Category
                 </button>
             </form>
 
@@ -68,13 +76,18 @@ function CategoryPanel({
                             className="category-item"
                         >
                             <span>{category.name}</span>
-
+                            {category.monthly_budget !== null && (
+                                <span className="monthly-budget">
+                                    ₹{category.monthly_budget}
+                                </span>
+                            )}
                             <button
                                 className="icon-btn delete-btn"
                                 onClick={() => onDelete(category.id)}
                             >
                                 <FaTrash />
                             </button>
+
 
                         </li>
 

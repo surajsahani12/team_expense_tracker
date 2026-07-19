@@ -70,7 +70,7 @@ function ExpenseTable({
 
                                 <tr key={expense.id}>
 
-                                    <td>{new Date(expense.date).toLocaleDateString("en-IN")}</td>
+                                    <td>{new Date(expense.expense_date).toLocaleDateString("en-IN")}</td>
 
                                     <td>{expense.description}</td>
 
