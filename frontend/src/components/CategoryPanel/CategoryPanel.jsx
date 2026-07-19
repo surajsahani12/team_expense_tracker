@@ -20,6 +20,10 @@ function CategoryPanel({
             return;
         }
 
+        if (monthlyBudget && Number(monthlyBudget) < 0) {
+            alert("Monthly budget cannot be negative.");
+            return;
+        }
         onAdd(name, monthlyBudget);
 
         setCategoryName("");
