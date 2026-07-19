@@ -1,0 +1,30 @@
+body {
+  background: #f4f6f9;
+}
+
+.app {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.header {
+  margin-bottom: 35px;
+}
+
+.header h1 {
+  font-size: 34px;
+  color: #1f2937;
+}
+
+.header p {
+  margin-top: 6px;
+  color: #666;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin: 30px 0;
+}

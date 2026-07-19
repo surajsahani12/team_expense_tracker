@@ -1,0 +1,26 @@
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.summary-card {
+    transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.summary-card p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-bottom: var(--space-xs);
+}
+
+.summary-card h2 {
+    color: var(--text);
+    font-size: 32px;
+    font-weight: 700;
+}

@@ -1,0 +1,32 @@
+.expense-form-card h2 {
+    margin-bottom: var(--space-xs);
+    color: var(--text);
+}
+
+.expense-form-card p {
+    color: var(--text-light);
+    margin-bottom: var(--space-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+.expense-form-card .btn {
+    width: 100%;
+    margin-top: var(--space-sm);
+}
